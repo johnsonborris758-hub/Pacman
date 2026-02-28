@@ -157,11 +157,11 @@ function canTurn(entity, dir) {
 }
 
 function alignedToTile(entity) {
-  const offsetX = Math.abs(((entity.px - TILE / 2) % TILE + TILE) % TILE);
-  const offsetY = Math.abs(((entity.py - TILE / 2) % TILE + TILE) % TILE);
-  return offsetX < 3 || offsetX > TILE - 3
-    ? offsetY < 3 || offsetY > TILE - 3
-    : false;
+  const offsetX = ((entity.px - TILE / 2) % TILE + TILE) % TILE;
+  const offsetY = ((entity.py - TILE / 2) % TILE + TILE) % TILE;
+  const distX = Math.min(offsetX, TILE - offsetX);
+  const distY = Math.min(offsetY, TILE - offsetY);
+  return distX <= 1 && distY <= 1;
 }
 
 function snapEntity(entity) {
